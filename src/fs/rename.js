@@ -17,7 +17,6 @@ const rename = async () => {
       path.join(targetFolder, 'properFilename.md')
     );
   } catch (error) {
-    console.log(error);
     throw new Error('FS operation failed');
   }
 };
