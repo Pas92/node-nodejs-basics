@@ -1,5 +1,4 @@
 import { createReadStream, createWriteStream } from 'node:fs';
-import * as fs from 'node:fs/promises';
 import path from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import { fileURLToPath } from 'node:url';

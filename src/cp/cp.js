@@ -2,8 +2,6 @@ import * as fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { fork } from 'node:child_process';
-import { stdin } from 'node:process';
-import { pipeline } from 'node:stream/promises';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,9 +16,8 @@ const spawnChildProcess = async (args) => {
   });
 
   child.on('error', (err) => {
-    console.log(err);
     controller.abort();
-    throw err;
+    throw new Error('Child process failed');
   });
 };
 
