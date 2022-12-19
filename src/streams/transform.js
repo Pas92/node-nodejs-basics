@@ -1,10 +1,5 @@
-import path from 'node:path';
 import { Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
-import { fileURLToPath } from 'node:url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 class ReverseTransform extends Transform {
   _transform(chunk, enc, cb) {
@@ -20,7 +15,9 @@ class ReverseTransform extends Transform {
 }
 
 const transform = async () => {
-  pipeline(process.stdin, new ReverseTransform(), process.stdout);
+  pipeline(process.stdin, new ReverseTransform(), process.stdout).catch(() => {
+    throw new Error('Stream error');
+  });
 };
 
 await transform();
